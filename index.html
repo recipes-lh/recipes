@@ -14,8 +14,9 @@
     }
     header, footer { padding: var(--pad); text-align: center; }
     header { font-weight: 600; }
-    footer { font-size: 0.9rem; color: #444; }
+    footer { font-size: .9rem; color: #444; }
 
+    /* Viewport for the slides */
     .viewport {
       height: calc(100svh - var(--chrome));
       margin: 0 var(--pad);
@@ -24,81 +25,75 @@
       box-shadow: 0 8px 30px rgba(0,0,0,.08);
       background: #fff;
     }
+
+    /* Horizontal rail: simple flex row (more reliable than grid+flex centering for iOS) */
     .rail {
       height: 100%;
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: 100%;
+      display: flex;
       overflow-x: auto;
+      overflow-y: hidden;            /* prevent vertical scroll on the rail */
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-    }
-    .slide {
-      scroll-snap-align: start;
-      display: flex; align-items: center; justify-content: center;
-      height: 100%;
-    }
-    .slide img {
-      max-width: 100%;
-      max-height: 100%;
-      height: auto; display: block;
+      overscroll-behavior-x: contain;
+      scroll-behavior: smooth;
+      touch-action: pan-x;           /* hint: horizontal gestures belong to the rail */
     }
 
-    .text {
-      padding: 18px 16px 24px;
-      line-height: 1.5;
-      overflow: auto;
+    /* Each slide fills the viewport width */
+    .slide {
+      flex: 0 0 100%;
+      height: 100%;
+      scroll-snap-align: start;
     }
-    .text h1, .text h2 { margin: 0 0 10px; }
-    .text h1 { font-size: 1.25rem; }
-    .text h2 { font-size: 1.05rem; color: #333; }
-    .sep { margin: 10px 0; text-align: center; opacity: .5; letter-spacing: .2em; }
+
+    /* Image slides: center content without affecting scroll positions */
+    .slide--image {
+      display: grid;
+      place-items: center;
+      padding: 0;
+    }
+    .slide--image img {
+      max-width: 100%;
+      max-height: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Text slide: make THIS the sole vertical scroll container */
+    .slide--text {
+      padding: 18px 16px 24px;
+      overflow-y: auto;              /* vertical scroll lives here */
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      line-height: 1.5;
+    }
+
     .item { margin: 12px 0 14px; }
     .item h3 { margin: 0 0 6px; font-size: 1rem; }
     ul { margin: 0 0 8px 1.1em; padding: 0; }
     li { margin: 2px 0; }
-    .note { margin-top: 12px; font-style: italic; color: #333; }
-    .dots { display: flex; gap: 8px; justify-content: center; align-items: center; margin-top: 10px; }
-    .dots a {
-      width: 8px; height: 8px; border-radius: 999px; background: #ccc; display: inline-block;
-      text-indent: -9999px;
-    }
-    :target ~ .controls a[href="#one"],
-    :target ~ .controls a[href="#two"],
-    :target ~ .controls a[href="#three"] { background: #ccc; }
-    #one:target ~ .controls a[href="#one"],
-    #two:target ~ .controls a[href="#two"],
-    #three:target ~ .controls a[href="#three"] { background: #111; }
-    body:not(:target) .controls a[href="#one"] { background: #111; }
-    .anchor { position: absolute; inset: 0 auto auto 0; width: 0; height: 0; overflow: hidden; }
+    .sep { margin: 10px 0; text-align: center; opacity: .5; letter-spacing: .2em; }
   </style>
 </head>
 <body>
   <header>🍹 Fur-Ever Phish Mocktails</header>
 
-  <!-- Invisible anchors for dot highlighting -->
-  <div id="one" class="anchor"></div>
-  <div id="two" class="anchor"></div>
-  <div id="three" class="anchor"></div>
-
   <main class="viewport">
     <div class="rail" aria-label="Swipe left/right to navigate">
       <!-- Slide 1: Image -->
-      <section class="slide" aria-label="Photo 1">
-        <img src="A_recipe_card_image_features_five_mocktail_recipes" alt="Mocktail photo 1">
+      <section class="slide slide--image" aria-label="Photo 1">
+        <img src="A_recipe_card_image_features_five_mocktail_recipes.png" alt="Mocktail photo 1">
       </section>
 
       <!-- Slide 2: Image -->
-      <section class="slide" aria-label="Photo 2">
+      <section class="slide slide--image" aria-label="Photo 2">
         <img src="A_recipe_card_illustration_showcases_five_non-alco.png" alt="Mocktail photo 2">
       </section>
 
-      <!-- Slide 3: Text page -->
-      <section class="slide text" aria-label="Recipe text">
+      <!-- Slide 3: Text page (starts at the top reliably) -->
+      <section class="slide slide--text" aria-label="Recipes">
         <article>
-          <h1>🎵 Fur-Ever Phish Mocktail Recipes 🐾</h1>
-          <h2>A jam session of flavors, paws, and pawsitive vibes</h2>
-          <div class="sep">⸻</div>
+
           <div class="item">
             <h3>1. Run Like a Lemon</h3>
             <ul>
@@ -106,7 +101,6 @@
               <li>1 oz fresh orange juice</li>
               <li>½ oz fresh lemon juice</li>
               <li>½ tsp agave syrup</li>
-              <li>1 serving of THC Drops</li>
             </ul>
             <p>Stir gently in a glass with ice. Garnish with a lemon wheel.</p>
           </div>
@@ -119,7 +113,6 @@
               <li>6 oz sparkling water</li>
               <li>3–4 muddled raspberries or blackberries</li>
               <li>1 tsp honey or simple syrup</li>
-              <li>1 serving of THC Drops</li>
             </ul>
             <p>Muddle berries, add remaining ingredients over ice, stir well. Add mint if desired.</p>
           </div>
@@ -133,7 +126,6 @@
               <li>4–5 fresh mint leaves</li>
               <li>½ oz fresh lime juice</li>
               <li>1 tsp sugar</li>
-              <li>1 serving of THC Drops</li>
             </ul>
             <p>Muddle mint with sugar and lime. Add soda and ice, stir.</p>
           </div>
@@ -146,7 +138,6 @@
               <li>4 oz pineapple juice</li>
               <li>2 oz coconut water</li>
               <li>1 oz fresh lime juice</li>
-              <li>1 serving of THC Drops</li>
             </ul>
             <p>Shake with ice and strain into a chilled glass. Garnish with lime wheel.</p>
           </div>
@@ -158,7 +149,6 @@
             <ul>
               <li>6 oz apple cider (cold or warm)</li>
               <li>¼ tsp ground cinnamon</li>
-              <li>1 serving of THC Drops</li>
             </ul>
             <p>Stir together and serve hot or over ice. Garnish with cinnamon stick or apple slice.</p>
           </div>
@@ -170,7 +160,6 @@
             <ul>
               <li>6 oz sparkling water</li>
               <li>1 oz fresh lemon juice</li>
-              <li>1 serving of THC Drops</li>
             </ul>
             <p>Stir gently over ice. Garnish with lemon twist.</p>
           </div>
@@ -182,7 +171,6 @@
             <ul>
               <li>6 oz cold seltzer</li>
               <li>1 oz cherry juice concentrate</li>
-              <li>1 serving of THC Drops</li>
             </ul>
             <p>Stir over ice. Add a cherry on top if desired.</p>
           </div>
@@ -194,7 +182,6 @@
             <ul>
               <li>5 oz coconut water</li>
               <li>1 oz fresh lime juice</li>
-              <li>1 serving of THC Drops</li>
             </ul>
             <p>Stir and serve chilled with lime wedge.</p>
           </div>
@@ -206,7 +193,6 @@
             <ul>
               <li>6 oz non-alcoholic ginger beer</li>
               <li>½ oz lime juice</li>
-              <li>1 serving of THC Drops</li>
             </ul>
             <p>Serve in a mule mug or highball glass with ice. Garnish with lime slice.</p>
           </div>
@@ -218,25 +204,15 @@
             <ul>
               <li>6 oz sparkling water</li>
               <li>1 oz blueberry juice</li>
-              <li>1 serving of THC Drops</li>
             </ul>
             <p>Stir well over ice. Garnish with 2–3 blueberries on a toothpick.</p>
           </div>
 
-          <div class="sep">⸻</div>
         </article>
       </section>
     </div>
   </main>
 
-  <div class="controls">
-    <div class="dots" role="tablist" aria-label="Slides">
-      <a href="#one" aria-label="Go to slide 1">•</a>
-      <a href="#two" aria-label="Go to slide 2">•</a>
-      <a href="#three" aria-label="Go to slide 3">•</a>
-    </div>
-  </div>
-
-  <footer>Swipe to browse. Tap a dot to jump.</footer>
+  <footer>Swipe to browse images and the recipe list.</footer>
 </body>
 </html>
