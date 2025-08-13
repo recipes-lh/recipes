@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recipe Book</title>
+  <style>
+    :root { --pad: 14px; --chrome: 112px; } /* header+footer approx height */
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #fafafa; color: #111; display: flex; flex-direction: column;
+    }
+    header, footer { padding: var(--pad); text-align: center; }
+    header { font-weight: 600; }
+    footer { font-size: 0.9rem; color: #444; }
+
+    /* Horizontal snap gallery */
+    .viewport {
+      height: calc(100svh - var(--chrome));
+      margin: 0 var(--pad);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+      background: #fff;
+    }
+    .rail {
+      height: 100%;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .slide {
+      scroll-snap-align: start;
+      padding: 0; /* slides manage their own inner padding */
+      display: flex; align-items: center; justify-content: center;
+      height: 100%;
+    }
+
+    /* Image slides */
+    .slide img {
+      max-width: 100%;
+      max-height: 100%;
+      height: auto;
+      border-radius: 0; /* container already rounded */
+      display: block;
+    }
+
+    /* Text slide */
+    .text {
+      padding: 18px;
+      line-height: 1.5;
+      overflow: auto;
+    }
+    .text h2 { margin: 0 0 8px; }
+    .text p { margin: 0 0 10px; }
+
+    /* Dots/controls (anchor targets) */
+    .dots {
+      display: flex; gap: 8px; justify-content: center; align-items: center; margin-top: 10px;
+    }
+    .dots a {
+      width: 8px; height: 8px; border-radius: 999px; background: #ccc; display: inline-block;
+      text-indent: -9999px;
+    }
+    /* Highlight active dot when anchored */
+    :target ~ .controls a[href="#one"],
+    :target ~ .controls a[href="#two"],
+    :target ~ .controls a[href="#three"] { background: #ccc; } /* reset */
+
+    #one:target ~ .controls a[href="#one"],
+    #two:target ~ .controls a[href="#two"],
+    #three:target ~ .controls a[href="#three"] { background: #111; }
+
+    /* Default highlight first dot when no hash */
+    body:not(:target) .controls a[href="#one"] { background: #111; }
+
+    /* Hide anchor targets */
+    .anchor { position: absolute; inset: 0 auto auto 0; width: 0; height: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+  <header>🍳 Recipe Book</header>
+
+  <!-- Invisible anchors for dot highlighting -->
+  <div id="one" class="anchor"></div>
+  <div id="two" class="anchor"></div>
+  <div id="three" class="anchor"></div>
+
+  <main class="viewport">
+    <div class="rail" aria-label="Swipe left/right to navigate">
+      <!-- Slide 1: Image -->
+      <section class="slide" aria-label="Photo 1">
+        <img src="A_recipe_card_illustration_showcases_five_non-alco.png" alt="Finished dish, Photo 1">
+      </section>
+
+      <!-- Slide 2: Image -->
+      <section class="slide" aria-label="Photo 2">
+        <img src="photo-2.png" alt="Preparation step, Photo 2">
+      </section>
+
+      <!-- Slide 3: Text page -->
+      <section class="slide text" aria-label="Recipe text">
+        <article>
+          <h2>Spaghetti Aglio e Olio</h2>
+          <p><strong>Serves:</strong> 2 &nbsp;•&nbsp; <strong>Time:</strong> 15 min</p>
+          <p><strong>Ingredients:</strong> 200g spaghetti, 3 tbsp olive oil, 3 cloves garlic (sliced), pinch chili flakes, salt, parsley, lemon zest.</p>
+          <p><strong>Steps:</strong> Cook pasta in salted water. Sauté garlic in oil until just golden; add chili. Toss pasta with pan oil, splash pasta water, season. Finish with parsley and zest.</p>
+          <p><em>Tip:</em> Save pasta water; it’s the sauce.</p>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <!-- Dot controls (also work as taps) -->
+  <div class="controls">
+    <div class="dots" role="tablist" aria-label="Slides">
+      <a href="#one" aria-label="Go to slide 1">•</a>
+      <a href="#two" aria-label="Go to slide 2">•</a>
+      <a href="#three" aria-label="Go to slide 3">•</a>
+    </div>
+  </div>
+
+  <footer>Swipe to browse. Tap a dot to jump.</footer>
+</body>
+</html>
