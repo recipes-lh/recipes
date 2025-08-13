@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Recipe Book</title>
+  <title>Fur-Ever Phish Mocktails</title>
   <style>
-    :root { --pad: 14px; --chrome: 112px; } /* header+footer approx height */
+    :root { --pad: 14px; --chrome: 112px; }
     * { box-sizing: border-box; }
     html, body { margin: 0; height: 100%; }
     body {
@@ -16,7 +16,6 @@
     header { font-weight: 600; }
     footer { font-size: 0.9rem; color: #444; }
 
-    /* Horizontal snap gallery */
     .viewport {
       height: calc(100svh - var(--chrome));
       margin: 0 var(--pad);
@@ -36,55 +35,46 @@
     }
     .slide {
       scroll-snap-align: start;
-      padding: 0; /* slides manage their own inner padding */
       display: flex; align-items: center; justify-content: center;
       height: 100%;
     }
-
-    /* Image slides */
     .slide img {
       max-width: 100%;
       max-height: 100%;
-      height: auto;
-      border-radius: 0; /* container already rounded */
-      display: block;
+      height: auto; display: block;
     }
 
-    /* Text slide */
     .text {
-      padding: 18px;
+      padding: 18px 16px 24px;
       line-height: 1.5;
       overflow: auto;
     }
-    .text h2 { margin: 0 0 8px; }
-    .text p { margin: 0 0 10px; }
-
-    /* Dots/controls (anchor targets) */
-    .dots {
-      display: flex; gap: 8px; justify-content: center; align-items: center; margin-top: 10px;
-    }
+    .text h1, .text h2 { margin: 0 0 10px; }
+    .text h1 { font-size: 1.25rem; }
+    .text h2 { font-size: 1.05rem; color: #333; }
+    .sep { margin: 10px 0; text-align: center; opacity: .5; letter-spacing: .2em; }
+    .item { margin: 12px 0 14px; }
+    .item h3 { margin: 0 0 6px; font-size: 1rem; }
+    ul { margin: 0 0 8px 1.1em; padding: 0; }
+    li { margin: 2px 0; }
+    .note { margin-top: 12px; font-style: italic; color: #333; }
+    .dots { display: flex; gap: 8px; justify-content: center; align-items: center; margin-top: 10px; }
     .dots a {
       width: 8px; height: 8px; border-radius: 999px; background: #ccc; display: inline-block;
       text-indent: -9999px;
     }
-    /* Highlight active dot when anchored */
     :target ~ .controls a[href="#one"],
     :target ~ .controls a[href="#two"],
-    :target ~ .controls a[href="#three"] { background: #ccc; } /* reset */
-
+    :target ~ .controls a[href="#three"] { background: #ccc; }
     #one:target ~ .controls a[href="#one"],
     #two:target ~ .controls a[href="#two"],
     #three:target ~ .controls a[href="#three"] { background: #111; }
-
-    /* Default highlight first dot when no hash */
     body:not(:target) .controls a[href="#one"] { background: #111; }
-
-    /* Hide anchor targets */
     .anchor { position: absolute; inset: 0 auto auto 0; width: 0; height: 0; overflow: hidden; }
   </style>
 </head>
 <body>
-  <header>Recipe Book</header>
+  <header>🍹 Fur-Ever Phish Mocktails</header>
 
   <!-- Invisible anchors for dot highlighting -->
   <div id="one" class="anchor"></div>
@@ -95,28 +85,148 @@
     <div class="rail" aria-label="Swipe left/right to navigate">
       <!-- Slide 1: Image -->
       <section class="slide" aria-label="Photo 1">
-        <img src="A_recipe_card_illustration_showcases_five_non-alco.png" alt="Finished dish, Photo 1">
+        <img src="A_recipe_card_illustration_showcases_five_non-alco.png" alt="Mocktail photo 1">
       </section>
 
       <!-- Slide 2: Image -->
       <section class="slide" aria-label="Photo 2">
-        <img src="A_recipe_card_image_features_five_mocktail_recipes.png" alt="Preparation step, Photo 2">
+        <img src="A_recipe_card_image_features_five_mocktail_recipes.png" alt="Mocktail photo 2">
       </section>
 
       <!-- Slide 3: Text page -->
       <section class="slide text" aria-label="Recipe text">
         <article>
-          <h2>Spaghetti Aglio e Olio</h2>
-          <p><strong>Serves:</strong> 2 &nbsp;•&nbsp; <strong>Time:</strong> 15 min</p>
-          <p><strong>Ingredients:</strong> 200g spaghetti, 3 tbsp olive oil, 3 cloves garlic (sliced), pinch chili flakes, salt, parsley, lemon zest.</p>
-          <p><strong>Steps:</strong> Cook pasta in salted water. Sauté garlic in oil until just golden; add chili. Toss pasta with pan oil, splash pasta water, season. Finish with parsley and zest.</p>
-          <p><em>Tip:</em> Save pasta water; it’s the sauce.</p>
+          <p>Here’s a complete write-up of all 10 mocktail recipes, organized and formatted for readability. This version omits any cannabis references so it can be used in a general or family-friendly setting. You can always re-add those if needed for your personal copy.</p>
+
+          <div class="sep">⸻</div>
+
+          <h1>🎵 Fur-Ever Phish Mocktail Recipes 🐾</h1>
+          <h2>A jam session of flavors, paws, and pawsitive vibes</h2>
+
+          <div class="sep">⸻</div>
+
+          <div class="item">
+            <h3>1. Run Like a Lemon</h3>
+            <ul>
+              <li>6 oz sparkling water</li>
+              <li>1 oz fresh orange juice</li>
+              <li>½ oz fresh lemon juice</li>
+              <li>½ tsp agave syrup</li>
+            </ul>
+            <p>Stir gently in a glass with ice. Garnish with a lemon wheel.</p>
+          </div>
+
+          <div class="sep">⸻</div>
+
+          <div class="item">
+            <h3>2. Purrberry Jam</h3>
+            <ul>
+              <li>6 oz sparkling water</li>
+              <li>3–4 muddled raspberries or blackberries</li>
+              <li>1 tsp honey or simple syrup</li>
+            </ul>
+            <p>Muddle berries, add remaining ingredients over ice, stir well. Add mint if desired.</p>
+          </div>
+
+          <div class="sep">⸻</div>
+
+          <div class="item">
+            <h3>3. Mint the Moment</h3>
+            <ul>
+              <li>8 oz soda water</li>
+              <li>4–5 fresh mint leaves</li>
+              <li>½ oz fresh lime juice</li>
+              <li>1 tsp sugar</li>
+            </ul>
+            <p>Muddle mint with sugar and lime. Add soda and ice, stir.</p>
+          </div>
+
+          <div class="sep">⸻</div>
+
+          <div class="item">
+            <h3>4. Down with Disease… but Make it Colada</h3>
+            <ul>
+              <li>4 oz pineapple juice</li>
+              <li>2 oz coconut water</li>
+              <li>1 oz fresh lime juice</li>
+            </ul>
+            <p>Shake with ice and strain into a chilled glass. Garnish with lime wheel.</p>
+          </div>
+
+          <div class="sep">⸻</div>
+
+          <div class="item">
+            <h3>5. Bathtub Gin-ger Apple</h3>
+            <ul>
+              <li>6 oz apple cider (cold or warm)</li>
+              <li>¼ tsp ground cinnamon</li>
+            </ul>
+            <p>Stir together and serve hot or over ice. Garnish with cinnamon stick or apple slice.</p>
+          </div>
+
+          <div class="sep">⸻</div>
+
+          <div class="item">
+            <h3>6. Lemon Fluffhead</h3>
+            <ul>
+              <li>6 oz sparkling water</li>
+              <li>1 oz fresh lemon juice</li>
+            </ul>
+            <p>Stir gently over ice. Garnish with lemon twist.</p>
+          </div>
+
+          <div class="sep">⸻</div>
+
+          <div class="item">
+            <h3>7. Cherry Catnip</h3>
+            <ul>
+              <li>6 oz cold seltzer</li>
+              <li>1 oz cherry juice concentrate</li>
+            </ul>
+            <p>Stir over ice. Add a cherry on top if desired.</p>
+          </div>
+
+          <div class="sep">⸻</div>
+
+          <div class="item">
+            <h3>8. Coco Paw Breeze</h3>
+            <ul>
+              <li>5 oz coconut water</li>
+              <li>1 oz fresh lime juice</li>
+            </ul>
+            <p>Stir and serve chilled with lime wedge.</p>
+          </div>
+
+          <div class="sep">⸻</div>
+
+          <div class="item">
+            <h3>9. Ginger Fur Snap</h3>
+            <ul>
+              <li>6 oz non-alcoholic ginger beer</li>
+              <li>½ oz lime juice</li>
+            </ul>
+            <p>Serve in a mule mug or highball glass with ice. Garnish with lime slice.</p>
+          </div>
+
+          <div class="sep">⸻</div>
+
+          <div class="item">
+            <h3>10. Blue Sky Meow-er</h3>
+            <ul>
+              <li>6 oz sparkling water</li>
+              <li>1 oz blueberry juice</li>
+            </ul>
+            <p>Stir well over ice. Garnish with 2–3 blueberries on a toothpick.</p>
+          </div>
+
+          <div class="sep">⸻</div>
+
+          <p class="note">Let me know if you’d like this saved to a PDF or formatted as a printable booklet!</p>
         </article>
       </section>
     </div>
   </main>
 
-  <!-- Dot controls (also work as taps) -->
   <div class="controls">
     <div class="dots" role="tablist" aria-label="Slides">
       <a href="#one" aria-label="Go to slide 1">•</a>
